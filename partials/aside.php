@@ -1,1 +1,1 @@
-<aside>menu vertical</aside>
+<aside class="aside">menu vertical</aside>

@@ -1,8 +1,10 @@
+/*general dv*/
 body{
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 }
 
+/*header dv*/
 .header{
 	background-color: #aaaaff; 
 	height: 100px;
@@ -25,6 +27,7 @@ body{
 	width: 100%;
 }
 
+/*section login dv*/
 .section{
 	margin-top: 50px;
 }
@@ -34,7 +37,6 @@ body{
 	text-align: center;
 	text-transform: uppercase;
 }
-
 
 .div_login {
 	width: 70%;
@@ -81,19 +83,14 @@ button:hover {
   opacity: 0.8;
 }
 
-
-
-
-
-
-@media screen and (max-width: 300px) {
-  
-}
-
-
+/*aside home*/
 .aside{
 	background-color: #aaaaff;
 	width: 200px;
 	height: 500px;
 	float: left;
 }
+
+
+
+
