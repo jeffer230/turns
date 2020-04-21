@@ -1,6 +1,6 @@
 <?php require_once('partials/head.php'); ?>
 
-<body>
+<body onload="load()">
 
 <?php require_once('partials/header.php'); ?>
 
