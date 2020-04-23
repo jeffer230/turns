@@ -33,7 +33,7 @@
 		    		required 
 		    		class="input_login">
 		        
-		    <button id="boton">Ingresar</button>
+		    <button class="button" id="boton">Ingresar</button>
 		    
 		  </div>
 

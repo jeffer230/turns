@@ -7,24 +7,24 @@ body{
 /*header dv*/
 .header{
 	background-color: #4caf509c ; /*#4caf50*/
-	height: 100px;
+	height: 80px;
 	padding: 20px;
 }
 
 .header #logo{
-	width: 100px;
+	width: 80px;
 	float: left;
 	margin-left: 20px;
+}
+
+.header #logo img{
+	width: 100%;
 }
 
 .header_title{
 	text-align: center;
 	font-weight: bold;
-	font-size: 30px;
-}
-
-.header #logo img{
-	width: 100%;
+	font-size: 25px;
 }
 
 /*section login dv*/
@@ -69,7 +69,7 @@ img.avatar {
   box-sizing: border-box;
 }
 
-button {
+.button {
   background-color: #4CAF50;
   color: white;
   padding: 14px 20px;
@@ -79,16 +79,113 @@ button {
   width: 100%;
 }
 
-button:hover {
+.button:hover {
   opacity: 0.8;
 }
 
-/*aside home*/
+
+/******* aside ************/
+/*aside nav menu lateral*/
 .aside{
 	background-color: #aaaaff;
 	width: 200px;
 	height: 500px;
 	float: left;
+}
+
+.sidenav {
+	/*background-color: #fff;
+	float: left;
+	vertical-align: top;
+  	height: 100%;
+  	width: 200px;
+  	padding-top: 20px;
+  	-webkit-box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
+	box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);*/
+
+
+  	background: #fff;
+	height: 100vh;
+	vertical-align: top;
+	width: 200px;
+	-webkit-box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
+	box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08); 
+	padding-top: 20px;
+	position: fixed;
+	z-index: 1;
+
+}
+
+.sidenav a {
+  padding: 10px 6px 6px 15px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #000;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #4caf509c;
+}
+
+.main {
+  margin-left: 220px; /* Same as the width of the sidenav */
+}
+
+
+
+
+
+/******* home ************/
+/*header home*/
+.header_home{
+	background-color: #aaaaff; 
+    padding: 20px;
+    background: #fff;
+    height: 12vh;
+    box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
+}
+
+.header_home #logo{
+	width: 100px;
+	float: left;
+	margin-left: 20px;
+	padding: 0em 1em 0em 1em;
+}
+
+.headerhome_title{
+	text-align: center;
+    font-size: 30px;
+    line-height: 50px;
+}
+
+
+/* CONTENIDO QUE CARGA EN MEDIO */
+#content{
+	margin-left:15%;
+	margin-top: 2%;
+}
+
+.opciones{
+    clear: both;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 50px;
+    text-transform: uppercase;
+    margin-left: 1em;
+}
+
+.menu-title {
+    color: #41434d;
+    clear: both;
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 90px;
+    padding: 0;
+    text-transform: uppercase;
+	width: 100%;
+	margin-left: 1em;
 }
 
 

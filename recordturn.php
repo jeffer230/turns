@@ -6,11 +6,9 @@
 <?php require_once('partials/aside.php'); ?>
 
 
-<section class="main">
+<section class="main" id="">
 	
-	<h1>titulos</h1>
-	
-	Queda contenidos
+	<?php require_once('partials/recordturn.php'); ?>
 	
 </section>
 
