@@ -8,9 +8,9 @@
 
 <section class="main">
 	
-	<h1>titulos</h1>
+	<h1> Inicio </h1>
 	
-	Queda contenidos
+	Vista de Inicio
 	
 </section>
 

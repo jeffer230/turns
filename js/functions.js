@@ -12,6 +12,6 @@ function load(){
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
-  console.log('todo bien');
+    console.log('conectado con Firebase');
  }
  
