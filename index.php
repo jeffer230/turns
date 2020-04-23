@@ -23,8 +23,8 @@
 		    		required 
 		    		class="input_login">
 
-		    <label for="password">
-		    	<b class="text_left">Contraseña</b>
+		    <label for="password" class="text_left">
+		    	<b>Contraseña</b>
 		    </label>
 		    <input type="password" 
 		    		id="password" 
