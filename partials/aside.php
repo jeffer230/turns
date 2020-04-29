@@ -1,6 +1,6 @@
 <aside class="aside">
     <ul class="nav navbar-nav">
-        <li class="menu-title">Opciones</li><!-- /.menu-title -->
+        <li class="menu-title">Opciones</li>
          <li class="opciones">
 			<a href="registrarGiro.php">Registrar Giro</a>
 		</li>
@@ -14,4 +14,9 @@
 			<a href="home.php">volver</a>
 		</li>
 	</ul>
+	<div class="list-group hand" id="signout">
+	  <a href="#" class="list-group-item list-group-item-action list-group-item-light">
+	  	Salir
+	  </a>
+	</div>
 </aside>
