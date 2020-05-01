@@ -3,22 +3,27 @@ var db = firebase.firestore();
 // add
 function add() {
 
-  var first= $("#first").val();
-  var last = $("#last").val();
+  var numero_doc= $("#document").val();
+  var nombres= $("#name").val();
+  var apellidos = $("#lastname").val();
   var email = $("#email").val();
-  var cellphone = $("#cellphone").val();
-  var address = $("#address").val();
+  var celular = $("#cellphone").val();
+  var direccion = $("#address").val();
 
-  db.collection("users").add({
-    first: "Ada",
-    last: "Lovelace",
-    born: 1815
+  db.collection("Clientes").add({
+    numero_doc: numero_doc,
+    nombres: nombres,
+    apellidos: apellidos,
+    email: email,
+    celular: celular,
+    direccion: direccion,
   })
   .then(function(docRef) {
-      console.log("Document written with ID: ", docRef.id);
+      console.log("El cliente se creo con el ID: ", docRef.id);
+      
   })
   .catch(function(error) {
-      console.error("Error adding document: ", error);
+      console.error("Error creando el cliente: ", error);
   });
 
 }
