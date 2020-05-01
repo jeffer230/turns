@@ -17,6 +17,8 @@
 	<script src="js/jquery-3.5.0.min.js"></script>
 	<!-- functions.js -->
 	<script src="js/functions.js" type="text/javascript" charset="utf-8" async defer></script>
+	<!-- crud.js -->
+	<!-- <script src="js/crud.js" type="text/javascript" charset="utf-8" async defer></script> -->
 	<!-- bootstrap js -->
 	<script src="bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8" async defer></script>
 	<!-- popperjs  -->

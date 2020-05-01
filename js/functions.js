@@ -16,10 +16,6 @@ firebase.analytics();
 console.log('conectado con Firebase');
 
 $(document).ready(function(){
-  // function load() {
-   
-  // };
-  
   
   // iniciar sesion
   $("#signin").click(function(){
@@ -50,8 +46,8 @@ $(document).ready(function(){
       loadhome();
     })
     .catch(function (error) {
-      console.log(error);
-      alert("El usuario no existe");
+      //console.log(error);
+      alert("Credenciales Incorrectas");
     });
   };
 
@@ -70,18 +66,16 @@ $(document).ready(function(){
     // manejador de eventos para los cambios del estado de autenticación
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        console.log('user',user)
+        //console.log('user',user)
         // User is signed in.
-        var displayName = user.displayName;
-        var email = user.email;
-        var emailVerified = user.emailVerified;
-        var photoURL = user.photoURL;
-        var isAnonymous = user.isAnonymous;
+        // var displayName = user.displayName;
+        // var email = user.email;
+        // var emailVerified = user.emailVerified;
+        // var photoURL = user.photoURL;
+        // var isAnonymous = user.isAnonymous;
         var uid = user.uid;
-        var providerData = user.providerData;
+        // var providerData = user.providerData;
         localStorage.setItem("id",uid);
-        localStorage.setItem("name",displayName);
-        localStorage.setItem("providerData",providerData);
         $(location).attr('href','home.php'); 
       } else {
         console.log('no user')
@@ -89,8 +83,6 @@ $(document).ready(function(){
       }
     });
   };
-
-  
 
 });
 
