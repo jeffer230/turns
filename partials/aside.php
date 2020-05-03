@@ -1,7 +1,10 @@
 <aside class="aside">
     <ul class="nav navbar-nav">
         <li class="menu-title">Opciones</li>
-         <li class="opciones">
+        <li class="opciones">
+			<a href="registrarCliente.php">Registrar Cliente</a>
+		</li>
+        <li class="opciones">
 			<a href="registrarGiro.php">Registrar Giro</a>
 		</li>
 		<li class="opciones">
