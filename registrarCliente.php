@@ -14,7 +14,7 @@
                 <section  class="row" id="content">
                     <div class="container">
                         <h2>Registrar Cliente</h2>
-                        <form method="post" name="contactForm">
+                        <form name="contactForm">
                                 <div class="row"> 
                                         <div class="form-group col-md-6">
                                             <label for="doc">Documento</label>
@@ -42,7 +42,8 @@
                     </div>
                         
                 </section>
-                
+                <!-- Modal -->
+                <?php require_once('partials/modal.php'); ?>
         </body>
 </html>
 

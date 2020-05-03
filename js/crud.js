@@ -36,6 +36,7 @@ $(document).ready(function(){
         console.log("El cliente se creo con el ID: ", docRef.id);
         alert("se creo el cliente con el id"+docRef.id );
         contactForm.reset(); 
+        $('#myModal').modal('show')
     })
     .catch(function(error) {
         console.error("Error creando el cliente: ", error);
