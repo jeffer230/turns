@@ -11,60 +11,37 @@
                 <!-- aside -->
                 <?php require_once('partials/aside.php'); ?>
                 <!-- section -->
-                <section class="row" id="content">      
-                        <form>
-                                <h2 class="title-registarg">Registrar giro</h2>
-                                <div class="form-row">
+                <section  class="row" id="content">
+                    <div class="container">
+                        <h2>Registrar Giro</h2><br/><br/>
+                        <form name="contactForm">
+                                <div class="row"> 
                                         <div class="form-group col-md-6">
-                                                <label for="inputEmail4">Nombres</label>
-                                                <input type="email" class="form-control" id="inputEmail4">
+                                            <label for="doc">Nombre del remitente</label>
+                                            <input type="text" class="form-control" id="nomRemitente" required placeholder="Ingresar los nombres">
                                         </div>
+                                </div> 
+                                <div class="row">       
+                                       <div class="form-group col-md-6">
+                                            <label for="name">Documento del reminitente</label>
+                                            <input type="number" class="form-control" id="docRemitente" required placeholder="Ingresar doc ">
+                                        </div>     
+                                </div> 
+                                <div class="row">
                                         <div class="form-group col-md-6">
-                                                <label for="inputPassword4">Apellidos</label>
-                                                <input type="password" class="form-control" id="inputPassword4">
+                                            <label for="lastname">Lugar de envio</label>
+                                            <input type="lastname" class="form-control" id="lugarEnvio" required placeholder="ingresar el lugar">
                                         </div>
-                                </div>
-                                <div class="form-group">
-                                        <label for="inputAddress">Cedula</label>
-                                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                                </div>
-                                <div class="form-group">
-                                        <label for="inputAddress2">Destino</label>
-                                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                                </div>
-                                <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                                <label for="inputCity">City</label>
-                                                <input type="text" class="form-control" id="inputCity">
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                                <label for="inputState">State</label>
-                                                <select id="inputState" class="form-control">
-                                                        <option selected>Choose...</option>
-                                                        <option>...</option>
-                                                </select>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                                <label for="inputZip">Valor</label>
-                                                <input type="text" class="form-control" id="inputZip">
-                                        </div>
-                                </div>
-                                <div class="form-group">
-                                        <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="gridCheck">
-                                                <label class="form-check-label" for="gridCheck">
-                                                        Check me out
-                                                </label>
-                                        </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary">
-                                        Sign in
+                                </div> 
+                                <button type="submit" class="btn btn-primary registrarGiro">
+                                        Registrar
                                 </button>
+
                         </form>
+                          
+                    </div>
+                        
                 </section>
-
-
-     
         </body>
 </html>
 

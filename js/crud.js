@@ -43,24 +43,45 @@ $(document).ready(function(){
     });
   };
 
-// add
-function addgiro(numerodoc,nombres,apellidos) {
+  
+ // registrar el giro
+  $('.registrarGiro').on("click", function (event) {
+        event.preventDefault();
 
-  db.collection("giros").add({
-    
-  })
-  .then(function(docRef) {
-      console.log("se creo el giro con el ID: ", docRef.id);
-      alert("se creo el registro con el id"+docRef.id );
-      
-  })
-  .catch(function(error) {
-      console.error("Error creando el giro: ", error);
-  });
+        console.log();
 
+        if ($('#nomRemitente').val() != '' || $('#docRemitente').val() != '' || $('#lugarEnvio').val() != '') {
+            var nomRemitente = $("#nomRemitente").val();
+            var docRemitente = $("#docRemitente").val();
+            var lugarEnvio = $("#lugarEnvio").val();
 
+            console.log(nomRemitente);
+            console.log(docRemitente);
+            console.log(lugarEnvio);
+            addGiro(nomRemitente, docRemitente, lugarEnvio);
+        } else {
+            alert('Por favor diligencie todos los campos');
+        }
+    });
+    function addGiro(nomRemitente, docRemitente, lugarEnvio) {
 
-}
+        db.collection("giros").add({
+            nomRemitente: nomRemitente,
+            docRemitente: docRemitente,
+            lugarEnvio: lugarEnvio
+
+        })
+        .then(function (docRef) {
+              console.log("se creo el giro con el ID: ", docRef.id);
+              alert("se creo el registro con el id" + docRef.id);
+
+        })
+        .catch(function (error) {
+             console.error("Error creando el giro: ", error);
+        });
+
+    }
+
 
 
 
