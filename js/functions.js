@@ -31,12 +31,12 @@ $(document).ready(function(){
     
   });
 
-  //
+  // Cerrar sesion
   $("#signout").click(function(){
     signoutUser();
   });
 
-  //
+  // login
   function loginUser(email, password) {
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(function (user) {
@@ -51,6 +51,7 @@ $(document).ready(function(){
     });
   };
 
+  // logout
   function signoutUser() {
     firebase.auth().signOut().then(function() {
       // Sign-out successful.
@@ -62,6 +63,7 @@ $(document).ready(function(){
     });
   };
 
+  // change status
   function loadhome(){
     // manejador de eventos para los cambios del estado de autenticación
     firebase.auth().onAuthStateChanged(function(user) {
@@ -78,7 +80,7 @@ $(document).ready(function(){
         localStorage.setItem("id",uid);
         $(location).attr('href','home.php'); 
       } else {
-        console.log('no user')
+        //console.log('no user')
         $(location).attr('href','index.php');
       }
     });

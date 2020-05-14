@@ -12,19 +12,23 @@
         <?php require_once('partials/aside.php'); ?>
         <!-- section -->
         <section id="content">
-            <h2 class="title-registarg">ESTADO DE MI GIRO </h2>
+            <h2 class="title-registarg"> Clientes </h2>
             <table class="table table-bordered col-md-9">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>FECHA DE ENVIO</th>
-                        <th>VALOR</th>
-                        <th>FECHA DE RETIRO</th>
+                        <th>Documento</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Email</th>
+                        <th>Telefono</th>
+                        <th>Dirección</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody id="giros">
-                    
+                <tbody id="customers">
+                
                 </tbody>
+
             </table>
         </section>
     </body>

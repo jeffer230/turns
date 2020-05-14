@@ -37,6 +37,15 @@
                                         Registrar
                                 </button>
 
+  <!--                                   RegistrarGiro
+    id_registroGiro
+    id_Remitente
+    id_Destinatario
+    valor
+    fecha
+    destino
+    id_Estado -->
+
                         </form>
                           
                     </div>
