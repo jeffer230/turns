@@ -16,10 +16,13 @@
             <table class="table table-bordered col-md-9">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>FECHA DE ENVIO</th>
-                        <th>VALOR</th>
-                        <th>FECHA DE RETIRO</th>
+                        <th>Fecha de envio</th>
+                        <th>Valor</th>
+                        <th>Remitente</th>
+                        <th>Destinatario</th>
+                        <th>Direccion</th>
+                        <th>Ciudad</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody id="giros">

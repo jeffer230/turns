@@ -79,25 +79,28 @@ $(document).ready(function(){
       event.preventDefault();
 
       if ($('#nomRemitente').val() != '' || $('#docRemitente').val() != '' || $('#lugarEnvio').val() != '') {
-          var nomRemitente = $("#nomRemitente").val();
-          var docRemitente = $("#docRemitente").val();
-          var lugarEnvio = $("#lugarEnvio").val();
-          // console.log(nomRemitente);
-          // console.log(docRemitente);
-          // console.log(lugarEnvio);
-          addGiro(nomRemitente, docRemitente, lugarEnvio);
+          var id_Remitente = $("#remitente").val();
+          var id_Destinatario = $("#destino").val();
+          var valor = $("#valorGiro").val();
+          var fecha = $("#fechaGiro").val();
+          var destino = $("#direccion").val();
+          var id_City = $("#ciudad").val();
+          console.log(destino);
+          addGiro(id_Remitente, id_Destinatario, valor, fecha, destino, id_City );
       } else {
           alert('Por favor diligencie todos los campos');
       }
   });
 
   // funcion agregar nuevo giro
-  function addGiro(nomRemitente, docRemitente, lugarEnvio) {
+    function addGiro(id_Remitente, id_Destinatario, valor, fecha, destino, id_City) {
     db.collection("giros").add({
-        nomRemitente: nomRemitente,
-        docRemitente: docRemitente,
-        lugarEnvio: lugarEnvio
-
+        id_Remitente: id_Remitente,
+        id_Destinatario: id_Destinatario,
+        valor: valor,
+        fecha: fecha,
+        destino: destino,
+        id_City: id_City
     })
     .then(function (docRef) {
           alert("se creo el registro con el id" + docRef.id);
@@ -115,9 +118,12 @@ $(document).ready(function(){
       querySnapshot.forEach((doc) => {
           //console.log(`${doc.id} => ${doc.data()}`);
           var html = `<tr>
-                        <th scope="row">${doc.data().nomRemitente}</th>
-                        <td>${doc.data().docRemitente}</td>
-                        <td>${doc.data().lugarEnvio}</td>
+                        <td>${doc.data().fecha}</td>
+                        <td>${doc.data().valor}</td>
+                        <td>${doc.data().id_Remitente}</td>
+                        <td>${doc.data().id_Destinatario}</td>
+                        <td>${doc.data().destino}</td>
+                        <td>${doc.data().id_City}</td>
                         <td>
                           <button class="btn btn-danger" title="Borrar" data-id="${doc.id}" data-tablet="giros" onclick="borrar('${doc.id}', 'giros')">
                              <i class="fa fa-pencil"></i> 
