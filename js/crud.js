@@ -79,28 +79,25 @@ $(document).ready(function(){
       event.preventDefault();
 
       if ($('#nomRemitente').val() != '' || $('#docRemitente').val() != '' || $('#lugarEnvio').val() != '') {
-          var id_Remitente = $("#remitente").val();
-          var id_Destinatario = $("#destino").val();
-          var valor = $("#valorGiro").val();
-          var fecha = $("#fechaGiro").val();
-          var destino = $("#direccion").val();
-          var id_City = $("#ciudad").val();
-          console.log(destino);
-          addGiro(id_Remitente, id_Destinatario, valor, fecha, destino, id_City );
+          var nomRemitente = $("#nomRemitente").val();
+          var docRemitente = $("#docRemitente").val();
+          var lugarEnvio = $("#lugarEnvio").val();
+          // console.log(nomRemitente);
+          // console.log(docRemitente);
+          // console.log(lugarEnvio);
+          addGiro(nomRemitente, docRemitente, lugarEnvio);
       } else {
           alert('Por favor diligencie todos los campos');
       }
   });
 
   // funcion agregar nuevo giro
-    function addGiro(id_Remitente, id_Destinatario, valor, fecha, destino, id_City) {
+  function addGiro(nomRemitente, docRemitente, lugarEnvio) {
     db.collection("giros").add({
-        id_Remitente: id_Remitente,
-        id_Destinatario: id_Destinatario,
-        valor: valor,
-        fecha: fecha,
-        destino: destino,
-        id_City: id_City
+        docRemitente: nomRemitente,
+        docRemitente: docRemitente,
+        lugarEnvio: lugarEnvio
+
     })
     .then(function (docRef) {
           alert("se creo el registro con el id" + docRef.id);
@@ -118,12 +115,9 @@ $(document).ready(function(){
       querySnapshot.forEach((doc) => {
           //console.log(`${doc.id} => ${doc.data()}`);
           var html = `<tr>
-                        <td>${doc.data().fecha}</td>
-                        <td>${doc.data().valor}</td>
-                        <td>${doc.data().id_Remitente}</td>
-                        <td>${doc.data().id_Destinatario}</td>
-                        <td>${doc.data().destino}</td>
-                        <td>${doc.data().id_City}</td>
+                        <th scope="row">${doc.data().nomRemitente}</th>
+                        <td>${doc.data().docRemitente}</td>
+                        <td>${doc.data().lugarEnvio}</td>
                         <td>
                           <button class="btn btn-danger" title="Borrar" data-id="${doc.id}" data-tablet="giros" onclick="borrar('${doc.id}', 'giros')">
                              <i class="fa fa-pencil"></i> 
@@ -137,6 +131,40 @@ $(document).ready(function(){
     });
   };
 
+
+  function LoadCustomer() {
+    var db = firebase.firestore(); //Mando a llamar la instancia de base de datos
+    var selected_item = document.getElementById('remitente');//Se llama el selected
+    selected_item.innerHTML = '';
+    selected_item.innerHTML += `<option value="0" selected>Selecciona cliente remitente</option> ` //Agrego un option por default
+    //select 2 destinantario 
+    var selected_item2 = document.getElementById('destino');//Se llama el selected
+    selected_item2.innerHTML = '';
+    selected_item2.innerHTML += `<option value="0" selected>Selecciona cliente destino</option> ` //Agrego un option por default
+
+    db.collection("clientes").onSnapshot((querySnapshot) => { //Se llaman los datos
+        querySnapshot.forEach((doc) => {
+           // console.log(`${doc.id} => ${doc.data().name}`);
+            selected_item.innerHTML += `<option value="${doc.id}">${doc.data().name}</option> .` //Aquí agrego los options de acuerdo a la base de datos.
+            selected_item2.innerHTML += `<option value="${doc.id}">${doc.data().name}</option> .` //Aquí agrego los options de acuerdo a la base de datos.
+        });
+    });
+  };
+
+  function LoadCities() {
+    var db = firebase.firestore(); //Mando a llamar la instancia de base de datos
+    var selected_item = document.getElementById('ciudad');//Se llama el selected
+    selected_item.innerHTML = '';
+    selected_item.innerHTML += `<option value="0" selected>Selecciona ciudad </option> ` //Agrego un option por default
+ 
+    db.collection("ciudad").onSnapshot((querySnapshot) => { //Se llaman los datos
+        querySnapshot.forEach((doc) => {
+            // console.log(`${doc.id} => ${doc.data().name}`);
+            selected_item.innerHTML += `<option value="${doc.id}">${doc.data().name}</option> .` //Aquí agrego los options de acuerdo a la base de datos.
+        });
+    });
+  }
+
   // ********* rutas ****************
   // validar la ruta 
   var pathname = $(location).attr('pathname');
@@ -145,6 +173,10 @@ $(document).ready(function(){
   }
   if (pathname == '/turns/historialGiro.php') {
     readGiros();
+  }
+  if (pathname == '/turns/registrarGiro.php') {
+    LoadCustomer();
+    LoadCities();
   }
 
 });

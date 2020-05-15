@@ -23,7 +23,6 @@
 	<script src="bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8" async defer></script>
 	<!-- popperjs  -->
 	<script src="https://unpkg.com/@popperjs/core@2"></script>
-	<script src="js/registrarGiro.js" type="text/javascript"></script>
 
 </head>
 
