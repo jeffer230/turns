@@ -14,7 +14,7 @@
                 <section  class="row" id="content">
                     <div class="container">
                         <h2>Registrar Giro</h2><br/><br/>
-                        <form name="contactForm">
+                        <form name="girosForm">
                                 <div class="row"> 
                                      <div class="form-group col-md-6">
                                        <label>Seleccione remitente</label>

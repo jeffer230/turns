@@ -61,10 +61,25 @@ $(document).ready(function(){
                       <td>${doc.data().phone}</td>
                       <td>${doc.data().address}</td>
                       <td>
-                        <button class="btn btn-danger" title="Borrar" data-id="${doc.id}" data-tablet="clientes" onclick="borrar('${doc.id}', 'clientes')">
-                           <i class="fa fa-pencil"></i> 
-                           Borrar
-                        </button>
+                        <div class="btn-group">
+                          <button class="btn btn-danger" 
+                                  title="Borrar" 
+                                  data-id="${doc.id}" 
+                                  data-tablet="clientes" 
+                                  onclick="borrar('${doc.id}', 'clientes')">
+                             <i class="fa fa-pencil"></i> 
+                             Borrar
+                          </button>
+                          <button class="btn 
+                                btn-warning" 
+                                title="Editar" 
+                                data-id="${doc.id}" 
+                                data-tablet="clientes" 
+                                onclick="editar('${doc.id}', 'clientes')">
+                             <i class="fa fa-pencil"></i> 
+                             Editar
+                          </button>
+                        </div>
                       </td>
                   </tr>`;
 
@@ -73,39 +88,128 @@ $(document).ready(function(){
     });
   };
 
+  // funcion leer cliente
+  function readCustomer(id,tablet) {
+    var docRef = db.collection(tablet).doc(id);
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+          //console.log("Document data:", doc.data());
+          $("#docid").val(doc.id);
+          $("#doc").val(doc.data().doc);
+          $("#name").val(doc.data().name);
+          $("#lastname").val(doc.data().lastname);
+          $("#email").val(doc.data().email);
+          $("#phone").val(doc.data().phone);
+          $("#address").val(doc.data().address);
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+            alert("No existe un cliente relacionado al ID");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+  };
+
+  // editar cliente
+  $('.editCliente').on("click", function( event ) {  
+      event.preventDefault();
+      if( $('#docid').val() != ''
+        || $('#doc').val() != '' 
+        || $('#name').val() != '' 
+        || $('#lastname').val() != '' 
+        || $('#email').val() != '' 
+        || $('#phone').val() != '' 
+        || $('#address').val() != '' 
+        ){
+        var id = $("#docid").val();
+        var doc = $("#doc").val();
+        var name = $("#name").val();
+        var lastname = $("#lastname").val();
+        var email = $("#email").val();
+        var phone = $("#phone").val();
+        var address = $("#address").val();
+        // add customer
+        editCustomer(id,doc,name,lastname,email,phone,address);
+      } else {
+        alert('Por favor diligencie todos los campos');
+      }
+  });
+
+  // funcion editar cliente
+  function editCustomer(id,doc,name,lastname,email,phone,address) {
+    var editCustomer = db.collection("clientes").doc(id);
+    return editCustomer.update({
+        doc: doc,
+        name: name,
+        lastname: lastname,
+        email: email,
+        phone: phone,
+        address: address
+    })
+    .then(function() {
+        alert('Cliente actualizado con éxito');
+    })
+    .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error al actualizar el Cliente: ", error);
+    });
+  };
+
   // *********** Giros ******************
   // registrar el giro
   $('.registrarGiro').on("click", function (event) {
       event.preventDefault();
 
-      if ($('#nomRemitente').val() != '' || $('#docRemitente').val() != '' || $('#lugarEnvio').val() != '') {
-          var nomRemitente = $("#nomRemitente").val();
-          var docRemitente = $("#docRemitente").val();
-          var lugarEnvio = $("#lugarEnvio").val();
-          // console.log(nomRemitente);
-          // console.log(docRemitente);
-          // console.log(lugarEnvio);
-          addGiro(nomRemitente, docRemitente, lugarEnvio);
+      if ($('#remitente').val() != '' 
+          || $('#destino').val() != '' 
+          || $('#valorGiro').val() != ''
+          || $('#fechaGiro').val() != ''
+          || $('#direccion').val() != ''
+          || $('#ciudad').val() != ''
+          ) {
+          var remitente = $("#remitente").val();
+          var destino = $("#destino").val();
+          var valorGiro = $("#valorGiro").val();
+          var fechaGiro = $("#fechaGiro").val();
+          var direccion = $("#direccion").val();
+          var ciudad = $("#ciudad").val();
+
+          
+          console.log(remitente);
+          console.log(destino);
+          console.log(valorGiro);
+          console.log(fechaGiro);
+          console.log(direccion);
+          console.log(ciudad);
+
+
+
+          addGiro(remitente, destino, valorGiro, fechaGiro, direccion, ciudad);
       } else {
           alert('Por favor diligencie todos los campos');
       }
   });
 
   // funcion agregar nuevo giro
-  function addGiro(nomRemitente, docRemitente, lugarEnvio) {
+  function addGiro(remitente, destino, valorGiro, fechaGiro, direccion, ciudad){
     db.collection("giros").add({
-        docRemitente: nomRemitente,
-        docRemitente: docRemitente,
-        lugarEnvio: lugarEnvio
+        remitente: remitente,
+        destino: destino,
+        valorGiro: valorGiro,
+        fechaGiro: fechaGiro,
+        direccion: direccion,
+        ciudad: ciudad
 
     })
     .then(function (docRef) {
           alert("se creo el registro con el id" + docRef.id);
+          girosForm.reset();
     })
     .catch(function (error) {
          console.error("Error creando el giro: ", error);
     });
-  }
+  };
 
   // funcion leer giros
   function readGiros() {
@@ -115,9 +219,12 @@ $(document).ready(function(){
       querySnapshot.forEach((doc) => {
           //console.log(`${doc.id} => ${doc.data()}`);
           var html = `<tr>
-                        <th scope="row">${doc.data().nomRemitente}</th>
-                        <td>${doc.data().docRemitente}</td>
-                        <td>${doc.data().lugarEnvio}</td>
+                        <td>${doc.data().fechaGiro}</td>
+                        <td>${doc.data().valorGiro}</td>
+                        <td>${doc.data().remitente}</td>
+                        <td>${doc.data().destino}</td>
+                        <td>${doc.data().direccion}</td>
+                        <td>${doc.data().ciudad}</td>
                         <td>
                           <button class="btn btn-danger" title="Borrar" data-id="${doc.id}" data-tablet="giros" onclick="borrar('${doc.id}', 'giros')">
                              <i class="fa fa-pencil"></i> 
@@ -163,7 +270,18 @@ $(document).ready(function(){
             selected_item.innerHTML += `<option value="${doc.id}">${doc.data().name}</option> .` //Aquí agrego los options de acuerdo a la base de datos.
         });
     });
-  }
+  };
+
+  
+
+    // Create an initial document to update.
+   
+ // var frankDocRef = db.collection("users").doc("frank");
+    // frankDocRef.set({
+    //     name: "Frank",
+    //     favorites: { food: "Pizza", color: "Blue", subject: "recess" },
+    //     age: 12
+    // });
 
   // ********* rutas ****************
   // validar la ruta 
@@ -178,8 +296,18 @@ $(document).ready(function(){
     LoadCustomer();
     LoadCities();
   }
+  if (pathname == '/turns/editarCliente.php') {
+    var editId = localStorage.getItem("editId");
+    var editTablet = localStorage.getItem("editTablet");
+    if (editId != null || editTablet != null) {
+      readCustomer(editId,editTablet); 
+    }else{
+      alert("No hay cliente para consultar");
+    } 
+  }
 
 });
+
 
 // *********** Borrar ******************** 
 function borrar(id,tablet) {
@@ -192,5 +320,12 @@ function borrar(id,tablet) {
   }else {
     console.log('No se borro el Item');
   } 
+};
+
+// *********** Borrar ******************** 
+function editar(id,tablet) {
+  localStorage.setItem("editId",id);
+  localStorage.setItem("editTablet",tablet);
+  $(location).attr('href','editarCliente.php'); 
 };
 
