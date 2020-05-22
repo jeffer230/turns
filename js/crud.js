@@ -149,6 +149,7 @@ $(document).ready(function(){
     })
     .then(function() {
         alert('Cliente actualizado con éxito');
+        $(location).attr('href','clientes.php');
     })
     .catch(function(error) {
         // The document probably doesn't exist.
@@ -226,15 +227,95 @@ $(document).ready(function(){
                         <td>${doc.data().direccion}</td>
                         <td>${doc.data().ciudad}</td>
                         <td>
+                        <div class="btn-group">
                           <button class="btn btn-danger" title="Borrar" data-id="${doc.id}" data-tablet="giros" onclick="borrar('${doc.id}', 'giros')">
                              <i class="fa fa-pencil"></i> 
                              Borrar
                           </button>
+                          <button class="btn 
+                                btn-warning" 
+                                title="Editar" 
+                                data-id="${doc.id}" 
+                                data-tablet="clientes" 
+                                onclick="editar('${doc.id}', 'giros')">
+                             <i class="fa fa-pencil"></i> 
+                             Editar
+                          </button>
+                        </div>
                         </td>
                     </tr>`;
 
           $("#giros").append(html);
       });
+    });
+  };
+
+  // funcion leer giro
+  function readGiro(id,tablet) {
+    var docRef = db.collection(tablet).doc(id);
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+          //console.log("Document data:", doc.data());
+          $("#docid").val(doc.id);
+          $("#remitente").val(doc.data().remitente);
+          $("#destino").val(doc.data().destino);
+          $("#valorGiro").val(doc.data().valorGiro);
+          $("#fechaGiro").val(doc.data().fechaGiro);
+          $("#direccion").val(doc.data().direccion);
+          $("#ciudad").val(doc.data().ciudad);
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+            alert("No existe un giro relacionado al ID");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+  };
+
+  // editar giro
+  $('.editGiro').on("click", function( event ) {  
+      event.preventDefault();
+      if ($('#docid').val() != ''
+          ||$('#remitente').val() != '' 
+          || $('#destino').val() != '' 
+          || $('#valorGiro').val() != ''
+          || $('#fechaGiro').val() != ''
+          || $('#direccion').val() != ''
+          || $('#ciudad').val() != ''
+          ) {
+          var id = $("#docid").val();
+          var remitente = $("#remitente").val();
+          var destino = $("#destino").val();
+          var valorGiro = $("#valorGiro").val();
+          var fechaGiro = $("#fechaGiro").val();
+          var direccion = $("#direccion").val();
+          var ciudad = $("#ciudad").val();
+
+          editGiro(id,remitente,destino,valorGiro,fechaGiro,direccion,ciudad);
+      } else {
+          alert('Por favor diligencie todos los campos');
+      }
+  });
+
+  // funcion editar cliente
+  function editGiro(id,remitente,destino,valorGiro,fechaGiro,direccion,ciudad) {
+    var editgiro = db.collection("giros").doc(id);
+    return editgiro.update({
+        remitente: remitente,
+        destino: destino,
+        valorGiro: valorGiro,
+        fechaGiro: fechaGiro,
+        direccion: direccion,
+        ciudad: ciudad
+    })
+    .then(function() {
+        alert('Giro actualizado con éxito');
+        $(location).attr('href','historialGiro.php');
+    })
+    .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error al actualizar el Giro: ", error);
     });
   };
 
@@ -306,6 +387,18 @@ $(document).ready(function(){
     } 
   }
 
+  if (pathname == '/turns/editarGiro.php') {
+    LoadCustomer();
+    LoadCities();
+    var editId = localStorage.getItem("editId");
+    var editTablet = localStorage.getItem("editTablet");
+    if (editId != null || editTablet != null) {
+      readGiro(editId,editTablet); 
+    }else{
+      alert("No hay cliente para consultar");
+    } 
+  }
+
 });
 
 
@@ -322,10 +415,16 @@ function borrar(id,tablet) {
   } 
 };
 
-// *********** Borrar ******************** 
+// *********** Editar *************** 
 function editar(id,tablet) {
   localStorage.setItem("editId",id);
   localStorage.setItem("editTablet",tablet);
-  $(location).attr('href','editarCliente.php'); 
+  if (tablet=='clientes') {
+    $(location).attr('href','editarCliente.php'); 
+  } 
+  if (tablet=='giros') {
+    $(location).attr('href','editarGiro.php'); 
+  } 
+  
 };
 
